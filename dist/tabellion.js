@@ -9,19 +9,38 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var Table = exports.Table = (function () {
-  function Table(el, options) {
+  function Table(el) {
     _classCallCheck(this, Table);
 
-    // TODO: el check, table exists?
-    this.root = el;
-    // TODO: defaults
-    this.options = options || {};
+    this._root = this._getDOMElement(el);
+
+    if (!this._isTableElement()) {
+      throw new Error("Element is not a table");
+    }
   }
 
   _createClass(Table, {
+    root: {
+      get: function () {
+        return this._root;
+      }
+    },
     "delete": {
       value: function _delete() {
         this.root.parentNode.removeChild(this.root);
+      }
+    },
+    _getDOMElement: {
+      value: function _getDOMElement(el) {
+        if (typeof el === "string") {
+          return document.body.querySelector(el);
+        }
+        return el;
+      }
+    },
+    _isTableElement: {
+      value: function _isTableElement() {
+        return this._root && this._root.tagName && this._root.tagName.toLowerCase() === "table";
       }
     }
   });
