@@ -4,6 +4,7 @@
   "description": "Table manipulation made easy",
   "main": "index.js",
   "scripts": {
+    "build": "node_modules/.bin/babel index.js --out-file dist/tabellion.js",
     "test": "npm test"
   },
   "repository": {
