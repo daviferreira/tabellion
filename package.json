@@ -2,9 +2,9 @@
   "name": "tabellion",
   "version": "0.0.0",
   "description": "Table manipulation made easy",
-  "main": "index.js",
+  "main": "dist/tabellion.js",
   "scripts": {
-    "build": "node_modules/.bin/babel index.js --out-file dist/tabellion.js",
+    "build": "node_modules/.bin/babel lib/table.js --out-file dist/tabellion.js",
     "test": "node_modules/.bin/mocha"
   },
   "repository": {
