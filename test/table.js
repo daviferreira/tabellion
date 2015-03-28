@@ -77,6 +77,8 @@ describe('table tests', function () {
       `;
       var table = new Table(tableEl);
       table.addRow(1);
+      // we need to do this check here because of jsdom
+      // https://github.com/tmpvar/jsdom/issues/742
       expect(table.root.rows.length, 'to be', 3);
       // all other rows have IDs
       expect(table.root.rows[1].getAttribute('id'), 'to be null');
