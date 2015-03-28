@@ -33,4 +33,15 @@ describe('table tests', function () {
     table.delete();
     expect(document.body.querySelector('table'), 'to be null');
   });
+
+  describe('insert row', () => {
+    it('should insert a row at the end of the table', () => {
+      var tableEl = document.createElement('table');
+      document.body.appendChild(tableEl);
+      var table = new Table(tableEl);
+      expect(tableEl.rows.length, 'to be', 0);
+      table.insertRow();
+      expect(tableEl.rows.length, 'to be', 1);
+    });
+  });
 });
