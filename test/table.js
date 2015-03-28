@@ -50,10 +50,10 @@ describe('table tests', function () {
     it('should insert a row at the end of the table by default', () => {
       var tableEl = document.createElement('table');
       tableEl.innerHTML = `
-        <tr id="row-2">
+        <tr id="row-1">
           <td>1</td>
         </tr>
-        <tr id="row-1">
+        <tr id="row-2">
           <td>2</td>
         </tr>
       `;
@@ -62,16 +62,16 @@ describe('table tests', function () {
       table.addRow();
       expect(table.root.rows.length, 'to be', 3);
       // all other rows have IDs
-      expect(table.root.rows[2].getAttribute('id'), 'to be null');
+      expect(table.root.rows[2].id, 'to be', '');
     });
 
     it('should be possible to specify an index', () => {
       var tableEl = document.createElement('table');
       tableEl.innerHTML = `
-        <tr id="row-2">
+        <tr id="row-1">
           <td>1</td>
         </tr>
-        <tr id="row-1">
+        <tr id="row-2">
           <td>2</td>
         </tr>
       `;
@@ -81,7 +81,26 @@ describe('table tests', function () {
       // https://github.com/tmpvar/jsdom/issues/742
       expect(table.root.rows.length, 'to be', 3);
       // all other rows have IDs
-      expect(table.root.rows[1].getAttribute('id'), 'to be null');
+      expect(table.root.rows[1].id, 'to be', '');
+    });
+  });
+
+  describe('delete row', () => {
+    it('should be possible to delete a row by index', () => {
+      var tableEl = document.createElement('table');
+      tableEl.innerHTML = `
+        <tr id="row-1">
+          <td>1</td>
+        </tr>
+        <tr id="row-2">
+          <td>2</td>
+        </tr>
+      `;
+      var table = new Table(tableEl);
+      expect(table.root.rows.length, 'to be', 2);
+      table.deleteRow(0);
+      expect(table.root.rows.length, 'to be', 1);
+      expect(table.root.rows[0].id, 'to be', 'row-2');
     });
   });
 });
