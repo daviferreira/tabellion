@@ -13,8 +13,9 @@ describe('table tests', function () {
 
   it('shoud accept a string selector', () => {
     var tableEl = document.createElement('table');
+    tableEl.className = 'test-table';
     document.body.appendChild(tableEl);
-    var table = new Table('table');
+    var table = new Table('.test-table');
     expect(table.root, 'to be', tableEl);
     table.delete();
   });
