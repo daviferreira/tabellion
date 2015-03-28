@@ -5,6 +5,7 @@
   "main": "dist/tabellion.js",
   "scripts": {
     "bundle": "node_modules/.bin/babel lib/table.js --out-file dist/tabellion.js",
+    "lint": "node_modules/.bin/jshint .",
     "test": "node_modules/.bin/mocha --compilers js:babel/register"
   },
   "repository": {
@@ -25,6 +26,7 @@
   "devDependencies": {
     "babel": "^4.7.16",
     "jsdom": "^4.0.5",
+    "jshint": "^2.6.3",
     "mocha": "^2.2.1",
     "mocha-jsdom": "^0.2.1",
     "unexpected": "^6.4.0"

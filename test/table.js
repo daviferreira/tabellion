@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import jsdom from 'mocha-jsdom';
 import expect from 'unexpected';
 import { Table } from '../lib/table';
