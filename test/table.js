@@ -29,6 +29,15 @@ describe('table tests', function () {
     }, 'to throw', 'Element is not a table');
   });
 
+  it('should be possible to set a new root element', () => {
+    var tableEl = document.createElement('table');
+    var table = new Table(tableEl);
+    expect(table.root, 'to be', tableEl);
+    var anotherTableEl = document.createElement('table');
+    table.root = anotherTableEl;
+    expect(table.root, 'to be', anotherTableEl);
+  });
+
   it('should delete a table', () => {
     var tableEl = document.createElement('table');
     document.body.appendChild(tableEl);
