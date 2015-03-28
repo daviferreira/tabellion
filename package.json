@@ -4,7 +4,7 @@
   "description": "Table manipulation made easy",
   "main": "dist/tabellion.js",
   "scripts": {
-    "build": "node_modules/.bin/babel lib/table.js --out-file dist/tabellion.js",
+    "bundle": "node_modules/.bin/babel lib/table.js --out-file dist/tabellion.js",
     "test": "node_modules/.bin/mocha"
   },
   "repository": {
