@@ -57,13 +57,29 @@ describe('table tests', function () {
           <td>2</td>
         </tr>
       `;
-      document.body.appendChild(tableEl);
       var table = new Table(tableEl);
-      expect(tableEl.rows.length, 'to be', 2);
+      expect(table.root.rows.length, 'to be', 2);
       table.addRow();
-      expect(tableEl.rows.length, 'to be', 3);
+      expect(table.root.rows.length, 'to be', 3);
       // all other rows have IDs
-      expect(tableEl.rows[2].getAttribute('id'), 'to be null');
+      expect(table.root.rows[2].getAttribute('id'), 'to be null');
+    });
+
+    it('should be possible to specify an index', () => {
+      var tableEl = document.createElement('table');
+      tableEl.innerHTML = `
+        <tr id="row-2">
+          <td>1</td>
+        </tr>
+        <tr id="row-1">
+          <td>2</td>
+        </tr>
+      `;
+      var table = new Table(tableEl);
+      table.addRow(1);
+      expect(table.root.rows.length, 'to be', 3);
+      // all other rows have IDs
+      expect(table.root.rows[1].getAttribute('id'), 'to be null');
     });
   });
 });
