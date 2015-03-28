@@ -46,7 +46,7 @@ describe('table tests', function () {
     expect(document.body.querySelector('table'), 'to be null');
   });
 
-  describe('insert row', () => {
+  describe('add row', () => {
     it('should insert a row at the end of the table by default', () => {
       var tableEl = document.createElement('table');
       tableEl.innerHTML = `
@@ -60,7 +60,7 @@ describe('table tests', function () {
       document.body.appendChild(tableEl);
       var table = new Table(tableEl);
       expect(tableEl.rows.length, 'to be', 2);
-      table.insertRow();
+      table.addRow();
       expect(tableEl.rows.length, 'to be', 3);
       // all other rows have IDs
       expect(tableEl.rows[2].getAttribute('id'), 'to be null');
