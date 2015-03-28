@@ -4,6 +4,7 @@ import jsdom from 'mocha-jsdom';
 import expect from 'unexpected';
 import { Table } from '../lib/table';
 
+// TODO: table generator + before/after
 describe('table tests', function () {
   jsdom();
 
