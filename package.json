@@ -1,0 +1,24 @@
+{
+  "name": "tabellion",
+  "version": "0.0.0",
+  "description": "Table manipulation made easy",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daviferreira/tabellion.git"
+  },
+  "keywords": [
+    "table",
+    "dom",
+    "manipulation"
+  ],
+  "author": "Davi Ferreira <hi@daviferreira.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daviferreira/tabellion/issues"
+  },
+  "homepage": "https://github.com/daviferreira/tabellion"
+}
