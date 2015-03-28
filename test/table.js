@@ -1,7 +1,6 @@
-var jsdom = require('mocha-jsdom');
-var expect = require('unexpected');
-
-var { Table } = require('../dist/tabellion');
+import jsdom from 'mocha-jsdom';
+import expect from 'unexpected';
+import { Table } from '../lib/table';
 
 describe('table tests', function () {
   jsdom();
