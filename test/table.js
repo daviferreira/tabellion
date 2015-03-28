@@ -37,13 +37,23 @@ describe('table tests', function () {
   });
 
   describe('insert row', () => {
-    it('should insert a row at the end of the table', () => {
+    it('should insert a row at the end of the table by default', () => {
       var tableEl = document.createElement('table');
+      tableEl.innerHTML = `
+        <tr id="row-2">
+          <td>1</td>
+        </tr>
+        <tr id="row-1">
+          <td>2</td>
+        </tr>
+      `;
       document.body.appendChild(tableEl);
       var table = new Table(tableEl);
-      expect(tableEl.rows.length, 'to be', 0);
+      expect(tableEl.rows.length, 'to be', 2);
       table.insertRow();
-      expect(tableEl.rows.length, 'to be', 1);
+      expect(tableEl.rows.length, 'to be', 3);
+      // all other rows have IDs
+      expect(tableEl.rows[2].getAttribute('id'), 'to be null');
     });
   });
 });
