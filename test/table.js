@@ -20,7 +20,7 @@ describe('table tests', function () {
     document.body.appendChild(tableEl);
     var table = new Table('.test-table');
     expect(table.root, 'to be', tableEl);
-    table.delete();
+    table.deleteTable();
   });
 
   it('should raise an error when element is not a table', () => {
@@ -42,7 +42,7 @@ describe('table tests', function () {
     var tableEl = document.createElement('table');
     document.body.appendChild(tableEl);
     var table = new Table(tableEl);
-    table.delete();
+    table.deleteTable();
     expect(document.body.querySelector('table'), 'to be null');
   });
 
