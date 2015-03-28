@@ -19,6 +19,12 @@ describe('table tests', function () {
     table.delete();
   });
 
+  it('should raise an error when element is not a table', () => {
+    expect(function () {
+      return new Table('error');
+    }, 'to throw', 'Element is not a table');
+  });
+
   it('should delete a table', () => {
     var tableEl = document.createElement('table');
     document.body.appendChild(tableEl);
