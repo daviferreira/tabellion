@@ -1,7 +1,7 @@
 {
   "name": "tabellion",
-  "version": "0.0.0",
-  "description": "Table manipulation made easy",
+  "version": "0.1.0",
+  "description": "Table manipulation made easy, add/remove rows and cells.",
   "main": "dist/tabellion.js",
   "scripts": {
     "bundle": "node_modules/.bin/babel lib/table.js --out-file dist/tabellion.js",
