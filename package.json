@@ -4,9 +4,11 @@
   "description": "Table manipulation made easy, add/remove rows and cells.",
   "main": "dist/tabellion.js",
   "scripts": {
+    "build": "npm run test && npm run bundle && npm run uglify",
     "bundle": "node_modules/.bin/babel lib/table.js --out-file dist/tabellion.js",
     "lint": "node_modules/.bin/jshint .",
-    "test": "npm run lint && node_modules/.bin/mocha --compilers js:babel/register"
+    "test": "npm run lint && node_modules/.bin/mocha --compilers js:babel/register",
+    "uglify": "node_modules/.bin/uglify -s dist/tabellion.js -o dist/tabellion.min.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
     "jshint": "^2.6.3",
     "mocha": "^2.2.1",
     "mocha-jsdom": "^0.2.1",
+    "uglify": "^0.1.1",
     "unexpected": "^6.4.0"
   }
 }
