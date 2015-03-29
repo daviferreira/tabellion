@@ -119,5 +119,16 @@ describe('table tests', () => {
         );
       });
     });
+
+    describe('delete column', () => {
+      it('should be possible to delete a column by index', () => {
+        var table = new Table(tableEl);
+        table.addColumn(0);
+        expect(table.root.rows[0].cells.length, 'to be', 2);
+        table.deleteColumn(0);
+        expect(table.root.rows[0].cells.length, 'to be', 1);
+        expect(table.root.rows[0].cells[0].id, 'to be', 'row-1-cell-1');
+      });
+    });
   });
 });
