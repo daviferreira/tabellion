@@ -1,6 +1,6 @@
 {
   "name": "tabellion",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Table manipulation made easy, add/remove rows and cells.",
   "main": "dist/tabellion.js",
   "scripts": {
