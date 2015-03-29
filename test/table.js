@@ -87,7 +87,7 @@ describe('table tests', () => {
         expect(() => {
           table.addRow('99.32');
         }, 'to throw', 'Invalid row index');
-        
+
         expect(() => {
           table.addRow(-10);
         }, 'to throw', 'Invalid row index');
@@ -101,6 +101,21 @@ describe('table tests', () => {
         table.deleteRow(0);
         expect(table.root.rows.length, 'to be', 1);
         expect(table.root.rows[0].id, 'to be', 'row-2');
+      });
+
+      it('should throw an error when index is invalid', () => {
+        var table = new Table(tableEl);
+        expect(() => {
+          table.deleteRow('invalid');
+        }, 'to throw', 'Invalid row index');
+
+        expect(() => {
+          table.deleteRow(-22.32);
+        }, 'to throw', 'Invalid row index');
+
+        expect(() => {
+          table.deleteRow('100');
+        }, 'to throw', 'Invalid row index');
       });
     });
 
