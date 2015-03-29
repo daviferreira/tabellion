@@ -22,10 +22,10 @@ describe('table tests', () => {
       tableEl = document.createElement('table');
       tableEl.innerHTML = `
         <tr id="row-1">
-          <td>1</td>
+          <td id="row-1-cell-1">1</td>
         </tr>
         <tr id="row-2">
-          <td>2</td>
+          <td id="row-2-cell-1">2</td>
         </tr>
       `;
     });
@@ -86,6 +86,37 @@ describe('table tests', () => {
         table.deleteRow(0);
         expect(table.root.rows.length, 'to be', 1);
         expect(table.root.rows[0].id, 'to be', 'row-2');
+      });
+    });
+
+    describe('add column', () => {
+      it('should be possible by add a column at the end by default', () => {
+        var table = new Table(tableEl);
+        expect(table.root.rows[0].cells.length, 'to be', 1);
+        table.addColumn();
+        expect(table.root.rows[0].cells.length, 'to be', 2);
+        // all other cells have IDs
+        expect(table.root.rows[0].cells[1].getAttribute('id'), 'to be', null);
+      });
+
+      it('should return an array with newly created cells', () => {
+        var table = new Table(tableEl);
+        var cells = table.addColumn();
+        expect(cells.length, 'to be', 2);
+      });
+
+      it('should be possible to add a column by index', () => {
+        var table = new Table(tableEl);
+        expect(table.root.rows[0].cells.length, 'to be', 1);
+        table.addColumn(0);
+        expect(table.root.rows[0].cells.length, 'to be', 2);
+        // all other cells have IDs
+        expect(table.root.rows[0].cells[0].getAttribute('id'), 'to be', null);
+        expect(
+          table.root.rows[0].cells[1].getAttribute('id'),
+          'to be',
+          'row-1-cell-1'
+        );
       });
     });
   });
