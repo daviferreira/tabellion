@@ -12,22 +12,66 @@ var Table = exports.Table = (function () {
   function Table(el) {
     _classCallCheck(this, Table);
 
-    this._root = this._getDOMElement(el);
-
-    if (!this._isTableElement()) {
-      throw new Error("Element is not a table");
-    }
+    this.root = el;
   }
 
   _createClass(Table, {
     root: {
       get: function () {
-        return this._root;
+        return this._element;
+      },
+      set: function (el) {
+        this._element = this._getDOMElement(el);
+
+        if (!this._isTableElement()) {
+          throw new Error("Element is not a table");
+        }
       }
     },
-    "delete": {
-      value: function _delete() {
-        this.root.parentNode.removeChild(this.root);
+    addRow: {
+      value: function addRow() {
+        var index = arguments[0] === undefined ? -1 : arguments[0];
+
+        this._validateRowIndex(index);
+        return this._element.insertRow(index);
+      }
+    },
+    deleteRow: {
+      value: function deleteRow(index) {
+        this._validateRowIndex(index);
+        this._element.rows[index].parentNode.removeChild(this._element.rows[index]);
+      }
+    },
+    addColumn: {
+
+      // TODO: index validation
+
+      value: function addColumn() {
+        var index = arguments[0] === undefined ? this._element.rows[0].cells.length : arguments[0];
+
+        var cells = [];
+        for (var i = 0; i < this._element.rows.length; i++) {
+          cells.push(this._element.rows[i].insertCell(index));
+        }
+        return cells;
+      }
+    },
+    deleteColumn: {
+
+      // TODO: index validation
+
+      value: function deleteColumn(index) {
+        for (var i = 0; i < this._element.rows.length; i++) {
+          this._element.rows[i].deleteCell(index);
+        }
+      }
+    },
+    deleteTable: {
+
+      // TODO: what to do after this? Invalidate the whole object somehow?
+
+      value: function deleteTable() {
+        this._element.parentNode.removeChild(this._element);
       }
     },
     _getDOMElement: {
@@ -40,7 +84,16 @@ var Table = exports.Table = (function () {
     },
     _isTableElement: {
       value: function _isTableElement() {
-        return this._root && this._root.tagName && this._root.tagName.toLowerCase() === "table";
+        return this._element && this._element.tagName && this._element.tagName.toLowerCase() === "table";
+      }
+    },
+    _validateRowIndex: {
+      value: function _validateRowIndex(index) {
+        index = parseInt(Number(index), 10);
+        // -1 is allowed to insert a row at the end of the table
+        if (isNaN(index) || index < -1 || index > this._element.rows.length) {
+          throw new Error("Invalid row index");
+        }
       }
     }
   });
