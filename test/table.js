@@ -77,6 +77,21 @@ describe('table tests', () => {
         // all other rows have IDs
         expect(table.root.rows[1].id, 'to be', '');
       });
+
+      it('should throw an error when index is invalid', () => {
+        var table = new Table(tableEl);
+        expect(() => {
+          table.addRow('invalid');
+        }, 'to throw', 'Invalid row index');
+
+        expect(() => {
+          table.addRow('99.32');
+        }, 'to throw', 'Invalid row index');
+        
+        expect(() => {
+          table.addRow(-10);
+        }, 'to throw', 'Invalid row index');
+      });
     });
 
     describe('delete row', () => {
