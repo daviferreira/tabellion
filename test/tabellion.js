@@ -221,6 +221,15 @@ describe('table tests', () => {
         });
         expect(table.root.rows[0].className, 'to contain', 'stripe');
       });
+
+      it('should toggle the zebra class', () => {
+        var table = new Tabellion(tableEl);
+        expect(table.root.rows[0].className, 'to be', '');
+        table.zebrify();
+        expect(table.root.rows[1].className, 'to contain', 'zebra');
+        table.zebrify();
+        expect(table.root.rows[0].className, 'to be', '');
+      });
     });
   });
 });
