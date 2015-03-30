@@ -1,11 +1,11 @@
-/* global describe, it, beforeEach */
+/* global describe, it, beforeEach, require, before */
 
 import jsdom from 'mocha-jsdom';
 import expect from 'unexpected';
 import { Tabellion } from '../lib/tabellion';
 
 describe('table tests', () => {
-  jsdom();
+  jsdom({globalize: true});
 
   describe('with an invalid element', () => {
     it('should raise an error when element is not a table', () => {
@@ -192,6 +192,10 @@ describe('table tests', () => {
     });
 
     describe('zebrify', () => {
+      before(() => {
+        require('../polyfill/classlist');
+      });
+
       it('should add zebra class to odd rows by default', () => {
         var table = new Tabellion(tableEl);
         expect(table.root.rows[0].className, 'to be', '');
