@@ -40,7 +40,7 @@ You can now instantiate a new MediumEditor object:
 * **addColumn([index])**
 * **deleteColumn(index)**
 * **deleteTable()**
-* **zebrify([even])**
+* **zebrify([even], [className])**
 
 ## Developing
 

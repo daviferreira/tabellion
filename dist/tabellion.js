@@ -29,12 +29,16 @@ var Tabellion = exports.Tabellion = (function () {
       }
     },
     zebrify: {
+
+      // TODO: options
+
       value: function zebrify() {
         var even = arguments[0] === undefined ? false : arguments[0];
+        var className = arguments[1] === undefined ? "zebra" : arguments[1];
 
         var start = even ? 0 : 1;
         for (var i = start; i < this._element.rows.length; i += 2) {
-          this._element.rows[i].className += " zebra";
+          this._element.rows[i].className += " " + className;
         }
       }
     },
