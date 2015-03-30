@@ -148,6 +148,21 @@ describe('table tests', () => {
           'row-1-cell-1'
         );
       });
+
+      it('should throw an error when index is invalid', () => {
+        var table = new Tabellion(tableEl);
+        expect(() => {
+          table.addColumn(NaN);
+        }, 'to throw', 'Invalid column index');
+
+        expect(() => {
+          table.addColumn(-21);
+        }, 'to throw', 'Invalid column index');
+
+        expect(() => {
+          table.addColumn('43');
+        }, 'to throw', 'Invalid column index');
+      });
     });
 
     describe('delete column', () => {
@@ -158,6 +173,21 @@ describe('table tests', () => {
         table.deleteColumn(0);
         expect(table.root.rows[0].cells.length, 'to be', 1);
         expect(table.root.rows[0].cells[0].id, 'to be', 'row-1-cell-1');
+      });
+
+      it('should throw an error when index is invalid', () => {
+        var table = new Tabellion(tableEl);
+        expect(() => {
+          table.deleteColumn('-100');
+        }, 'to throw', 'Invalid column index');
+
+        expect(() => {
+          table.deleteColumn(9999999);
+        }, 'to throw', 'Invalid column index');
+
+        expect(() => {
+          table.deleteColumn('undefined');
+        }, 'to throw', 'Invalid column index');
       });
     });
   });

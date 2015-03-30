@@ -32,23 +32,21 @@ var Tabellion = exports.Tabellion = (function () {
       value: function addRow() {
         var index = arguments[0] === undefined ? -1 : arguments[0];
 
-        this._validateRowIndex(index);
+        index = this._validateRowIndex(index);
         return this._element.insertRow(index);
       }
     },
     deleteRow: {
       value: function deleteRow(index) {
-        this._validateRowIndex(index);
+        index = this._validateRowIndex(index);
         this._element.rows[index].parentNode.removeChild(this._element.rows[index]);
       }
     },
     addColumn: {
-
-      // TODO: index validation
-
       value: function addColumn() {
-        var index = arguments[0] === undefined ? this._element.rows[0].cells.length : arguments[0];
+        var index = arguments[0] === undefined ? -1 : arguments[0];
 
+        index = this._validateColumnIndex(index);
         var cells = [];
         for (var i = 0; i < this._element.rows.length; i++) {
           cells.push(this._element.rows[i].insertCell(index));
@@ -57,10 +55,8 @@ var Tabellion = exports.Tabellion = (function () {
       }
     },
     deleteColumn: {
-
-      // TODO: index validation
-
       value: function deleteColumn(index) {
+        index = this._validateColumnIndex(index);
         for (var i = 0; i < this._element.rows.length; i++) {
           this._element.rows[i].deleteCell(index);
         }
@@ -94,6 +90,18 @@ var Tabellion = exports.Tabellion = (function () {
         if (isNaN(index) || index < -1 || index > this._element.rows.length) {
           throw new Error("Invalid row index");
         }
+        return index;
+      }
+    },
+    _validateColumnIndex: {
+      value: function _validateColumnIndex(index) {
+        index = parseInt(Number(index), 10);
+        // -1 is allowed to insert a cell at the end of the row
+        // TODO: colspan?
+        if (isNaN(index) || index < -1 || index > this._element.rows[0].cells.length) {
+          throw new Error("Invalid column index");
+        }
+        return index;
       }
     }
   });
