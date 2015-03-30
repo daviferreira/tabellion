@@ -41,6 +41,22 @@ You can now instantiate a new MediumEditor object:
 * **deleteColumn(index)**
 * **deleteTable()**
 
+## Developing
+
+Install dev dependencies:
+
+```npm install```
+
+Run tests:
+
+```npm test```
+
+Update build:
+
+```make```
+
+Profit :grin:
+
 ## Contributing
 
 1. Fork it
