@@ -2,7 +2,7 @@
 
 import jsdom from 'mocha-jsdom';
 import expect from 'unexpected';
-import { Tabellion } from '../lib/table';
+import { Tabellion } from '../lib/tabellion';
 
 describe('table tests', () => {
   jsdom();
