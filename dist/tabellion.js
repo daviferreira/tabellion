@@ -8,14 +8,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var Table = exports.Table = (function () {
-  function Table(el) {
-    _classCallCheck(this, Table);
+var Tabellion = exports.Tabellion = (function () {
+  function Tabellion(el) {
+    _classCallCheck(this, Tabellion);
 
     this.root = el;
   }
 
-  _createClass(Table, {
+  _createClass(Tabellion, {
     root: {
       get: function () {
         return this._element;
@@ -98,5 +98,5 @@ var Table = exports.Table = (function () {
     }
   });
 
-  return Table;
+  return Tabellion;
 })();
