@@ -16,4 +16,4 @@
 * Initial release:
   * Delete table
   * Add/Delete row
-  * Add/Delete column 
+  * Add/Delete column
