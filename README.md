@@ -8,13 +8,15 @@ cells.
 
 ## Installation
 
-**Via npm:**
+### Via npm
 
 Run in your console: `npm install tabellion`
 
-**Via bower:**
+### Via bower
 
 Run in your console: `bower install tabellion`
+
+### Manual installation
 
 Download the [latest release](https://github.com/daviferreira/tabellion/releases) and attach tabellion's script to your page:
 
