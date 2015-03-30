@@ -30,6 +30,15 @@ You can now instantiate a new MediumEditor object:
 <script>var tbl = new Tabellion(<your_table_element);</script>
 ```
 
+## API
+
+* **root**
+* **addRow([index])**
+* **deleteRow(index)**
+* **addColumn([index])**
+* **deleteColumn(index)**
+* **deleteTable()**
+
 ## Contributing
 
 1. Fork it
