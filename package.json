@@ -8,7 +8,8 @@
     "bundle": "node_modules/.bin/babel lib/tabellion.js --out-file dist/tabellion.js",
     "lint": "node_modules/.bin/jshint .",
     "test": "npm run lint && node_modules/.bin/mocha --compilers js:babel/register",
-    "uglify": "node_modules/.bin/uglify -s dist/tabellion.js -o dist/tabellion.min.js"
+    "uglify": "node_modules/.bin/uglify -s dist/tabellion.js -o dist/tabellion.min.js",
+    "watch": "node_modules/.bin/mocha --compilers js:babel/register --watch"
   },
   "repository": {
     "type": "git",
