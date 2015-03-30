@@ -53,7 +53,7 @@ Run tests:
 
 Update build:
 
-```make```
+```npm run build```
 
 Profit :grin:
 
