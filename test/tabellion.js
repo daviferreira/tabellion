@@ -190,5 +190,21 @@ describe('table tests', () => {
         }, 'to throw', 'Invalid column index');
       });
     });
+
+    describe('zebrify', () => {
+      it('should add zebra class to odd rows by default', () => {
+        var table = new Tabellion(tableEl);
+        expect(table.root.rows[1].className, 'not to contain', 'zebra');
+        table.zebrify();
+        expect(table.root.rows[1].className, 'to contain', 'zebra');
+      });
+
+      it('should zebrify even rows', () => {
+        var table = new Tabellion(tableEl);
+        expect(table.root.rows[0].className, 'not to contain', 'zebra');
+        table.zebrify(true);
+        expect(table.root.rows[0].className, 'to contain', 'zebra');
+      });
+    });
   });
 });

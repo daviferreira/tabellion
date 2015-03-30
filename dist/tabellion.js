@@ -28,6 +28,16 @@ var Tabellion = exports.Tabellion = (function () {
         }
       }
     },
+    zebrify: {
+      value: function zebrify() {
+        var even = arguments[0] === undefined ? false : arguments[0];
+
+        var start = even ? 0 : 1;
+        for (var i = start; i < this._element.rows.length; i += 2) {
+          this._element.rows[i].className += " zebra";
+        }
+      }
+    },
     addRow: {
       value: function addRow() {
         var index = arguments[0] === undefined ? -1 : arguments[0];
