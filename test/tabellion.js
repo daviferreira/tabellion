@@ -202,14 +202,19 @@ describe('table tests', () => {
       it('should zebrify even rows', () => {
         var table = new Tabellion(tableEl);
         expect(table.root.rows[0].className, 'to be', '');
-        table.zebrify(true);
+        table.zebrify({
+          even: true
+        });
         expect(table.root.rows[0].className, 'to contain', 'zebra');
       });
 
       it('should accept a custom className', () => {
         var table = new Tabellion(tableEl);
         expect(table.root.rows[0].className, 'to be', '');
-        table.zebrify(true, 'stripe');
+        table.zebrify({
+          even: true,
+          className: 'stripe'
+        });
         expect(table.root.rows[0].className, 'to contain', 'stripe');
       });
     });
