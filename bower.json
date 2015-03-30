@@ -1,0 +1,26 @@
+{
+  "name": "tabellion",
+  "version": "0.1.1",
+  "homepage": "https://github.com/daviferreira/tabellion",
+  "authors": [
+    "Davi Ferreira <hi@daviferreira.com>"
+  ],
+  "description": "Lightweight script to manipulate tables, table rows and table cells.",
+  "main": "dist/tabellion.js",
+  "moduleType": [
+    "amd",
+    "es6"
+  ],
+  "keywords": [
+    "table",
+    "dom",
+    "manipulation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
