@@ -5,7 +5,11 @@ import expect from 'unexpected';
 import { Tabellion } from '../lib/tabellion';
 
 describe('table tests', () => {
-  jsdom({globalize: true});
+  jsdom();
+
+  before(() => {
+    require('../polyfill/classlist');
+  });
 
   describe('with an invalid element', () => {
     it('should raise an error when element is not a table', () => {
@@ -192,10 +196,6 @@ describe('table tests', () => {
     });
 
     describe('zebrify', () => {
-      before(() => {
-        require('../polyfill/classlist');
-      });
-
       it('should add zebra class to odd rows by default', () => {
         var table = new Tabellion(tableEl);
         expect(table.root.rows[0].className, 'to be', '');
@@ -229,6 +229,29 @@ describe('table tests', () => {
         expect(table.root.rows[1].className, 'to contain', 'zebra');
         table.zebrify();
         expect(table.root.rows[0].className, 'to be', '');
+      });
+    });
+
+    describe('highlight', () => {
+      it('should highlight a row by its index', () => {
+        var table = new Tabellion(tableEl);
+        table.highlight(1);
+        expect(table.root.rows[1].className, 'to be', 'highlight');
+      });
+
+      it('should throw an error when index is invalid', () => {
+        var table = new Tabellion(tableEl);
+        expect(() => {
+          table.highlight('highlight');
+        }, 'to throw', 'Invalid row index');
+
+        expect(() => {
+            table.highlight(-26.4);
+        }, 'to throw', 'Invalid row index');
+
+        expect(() => {
+          table.highlight('55,66');
+        }, 'to throw', 'Invalid row index');
       });
     });
   });
