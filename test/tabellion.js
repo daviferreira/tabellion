@@ -239,6 +239,14 @@ describe('table tests', () => {
         expect(table.root.rows[1].className, 'to be', 'highlight');
       });
 
+      it('should toggle the highlight class', () => {
+        var table = new Tabellion(tableEl);
+        table.highlight(1);
+        expect(table.root.rows[1].className, 'to be', 'highlight');
+        table.highlight(1);
+        expect(table.root.rows[1].className, 'to be', '');
+      });
+
       it('should throw an error when index is invalid', () => {
         var table = new Tabellion(tableEl);
         expect(() => {
