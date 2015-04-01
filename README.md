@@ -41,6 +41,7 @@ You can now instantiate a new MediumEditor object:
 * **deleteColumn(index)**
 * **deleteTable()**
 * **zebrify([options])**
+* **highlight(index)**
 
 ## Developing
 
