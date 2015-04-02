@@ -7,6 +7,9 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.substr(1);
+}
 
 var Tabellion = exports.Tabellion = (function () {
   function Tabellion(el) {
@@ -28,27 +31,18 @@ var Tabellion = exports.Tabellion = (function () {
         }
       }
     },
-    zebrify: {
-      value: function zebrify(options) {
-        options = Object.assign({
-          even: false,
-          className: "zebra"
-        }, options);
-        var start = options.even ? 0 : 1;
-        for (var i = start; i < this._element.rows.length; i += 2) {
-          // TODO: jsdom classList support
-          if (this._element.rows[i].hasOwnProperty("classList")) {
-            this._element.rows[i].classList.toggle(options.className);
-          } else {
-            this._element.rows[i].className += " " + options.className;
-          }
-        }
-      }
-    },
     addRow: {
       value: function addRow() {
         var index = arguments[0] === undefined ? -1 : arguments[0];
+        var row = arguments[1] === undefined ? undefined : arguments[1];
 
+        if (["above", "below"].indexOf(index) !== -1) {
+          if (index === "above") {
+            index = this._getRowIndex(row);
+          } else {
+            index = this._getRowIndex(row) + 1;
+          }
+        }
         index = this._validateRowIndex(index);
         return this._element.insertRow(index);
       }
@@ -62,7 +56,15 @@ var Tabellion = exports.Tabellion = (function () {
     addColumn: {
       value: function addColumn() {
         var index = arguments[0] === undefined ? -1 : arguments[0];
+        var column = arguments[1] === undefined ? undefined : arguments[1];
 
+        if (["before", "after"].indexOf(index) !== -1) {
+          if (index === "before") {
+            index = this._getColumnIndex(column);
+          } else {
+            index = this._getColumnIndex(column) + 1;
+          }
+        }
         index = this._validateColumnIndex(index);
         var cells = [];
         for (var i = 0; i < this._element.rows.length; i++) {
@@ -77,6 +79,26 @@ var Tabellion = exports.Tabellion = (function () {
         for (var i = 0; i < this._element.rows.length; i++) {
           this._element.rows[i].deleteCell(index);
         }
+      }
+    },
+    zebrify: {
+      value: function zebrify(options) {
+        options = Object.assign({
+          even: false,
+          className: "zebra"
+        }, options);
+        var start = options.even ? 0 : 1;
+        for (var i = start; i < this._element.rows.length; i += 2) {
+          this._element.rows[i].classList.toggle(options.className);
+        }
+      }
+    },
+    highlight: {
+      value: function highlight(index) {
+        var className = arguments[1] === undefined ? "highlight" : arguments[1];
+
+        index = this._validateRowIndex(index);
+        this._element.rows[index].classList.toggle(className);
       }
     },
     deleteTable: {
@@ -119,6 +141,55 @@ var Tabellion = exports.Tabellion = (function () {
           throw new Error("Invalid column index");
         }
         return index;
+      }
+    },
+    _getRowIndex: {
+      value: function _getRowIndex(row) {
+        this._validateElement(row, "tr", "row");
+        for (var i = 0; i < this._element.rows.length; i += 1) {
+          if (this._element.rows[i] === row) {
+            return i;
+          }
+        }
+      }
+    },
+    _getColumnIndex: {
+      value: function _getColumnIndex(column) {
+        this._validateElement(column, "td", "column");
+        for (var i = 0; i < column.parentNode.cells.length; i += 1) {
+          if (column.parentNode.cells[i] === column) {
+            return i;
+          }
+        }
+      }
+    },
+    _validateElement: {
+      value: function _validateElement(node, tagName, type) {
+        tagName = tagName.toLowerCase();
+        if (!(node && node.tagName && node.tagName.toLowerCase() === tagName)) {
+          throw new Error("Invalid " + type + " element");
+        } else {
+          this._validateChild(node, type);
+        }
+      }
+    },
+    _validateChild: {
+      value: function _validateChild(node, type) {
+        if (!this._isDescendant(node)) {
+          throw new Error("" + capitalize(type) + " is not a child of selected table");
+        }
+      }
+    },
+    _isDescendant: {
+      value: function _isDescendant(child) {
+        var node = child.parentNode;
+        while (node !== null) {
+          if (node === this._element) {
+            return true;
+          }
+          node = node.parentNode;
+        }
+        return false;
       }
     }
   });
