@@ -57,6 +57,51 @@ describe('row tests', () => {
     });
   });
 
+  describe('above and below', () => {
+    it('should be possible to add a row above other row', () => {
+      var table = new Tabellion(tableEl);
+      expect(table.root.rows.length, 'to be', 2);
+      table.addRow('above', table.root.rows[1]);
+      expect(table.root.rows.length, 'to be', 3);
+      expect(table.root.rows[0].id, 'to be', 'row-1');
+      expect(table.root.rows[1].id, 'to be', '');
+      expect(table.root.rows[2].id, 'to be', 'row-2');
+    });
+
+    it('should be possible to add a row below other row', () => {
+      var table = new Tabellion(tableEl);
+      expect(table.root.rows.length, 'to be', 2);
+      table.addRow('below', table.root.rows[0]);
+      expect(table.root.rows.length, 'to be', 3);
+      expect(table.root.rows[0].id, 'to be', 'row-1');
+      expect(table.root.rows[1].id, 'to be', '');
+      expect(table.root.rows[2].id, 'to be', 'row-2');
+    });
+
+    it('should throw an error when row element is invalid', () => {
+      var table = new Tabellion(tableEl);
+      expect(() => {
+        table.addRow('above');
+      }, 'to throw', 'Invalid row element');
+
+      expect(() => {
+        table.addRow('below', window.document.body);
+      }, 'to throw', 'Invalid row element');
+
+      expect(() => {
+        table.addRow('above', tableEl);
+      }, 'to throw', 'Invalid row element');
+    });
+
+    it('should throw an error when row is not a child of current table', () => {
+      var table = new Tabellion(tableEl);
+      var rowEl = document.createElement('tr');
+      expect(() => {
+        table.addRow('above', rowEl);
+      }, 'to throw', 'Row is not a child of selected table');
+    });
+  });
+
   describe('delete row', () => {
     it('should be possible to delete a row by index', () => {
       var table = new Tabellion(tableEl);
