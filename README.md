@@ -35,13 +35,14 @@ You can now instantiate a new MediumEditor object:
 ## API
 
 * **root**
-* **addRow([index])**
+* **addRow([index], [target])**
 * **deleteRow(index)**
-* **addColumn([index])**
+* **addColumn([index], [target])**
 * **deleteColumn(index)**
 * **deleteTable()**
 * **zebrify([options])**
 * **highlight(index)**
+
 
 ## Developing
 

@@ -1,3 +1,9 @@
+0.2.1 / 2015-04-02
+==================
+
+* Add semantic versions of addRow and addColumn
+
+
 0.2.0 / 2015-03-30
 ==================
 
