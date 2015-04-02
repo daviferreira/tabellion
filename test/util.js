@@ -92,4 +92,31 @@ describe('util tests', () => {
       }, 'to throw', 'Invalid row index');
     });
   });
+
+  describe('all utility methods should work well together', () => {
+    it('should zebrify and highlight a row by its index', () => {
+      var table = new Tabellion(tableEl);
+      table.zebrify();
+      table.highlight(1);
+      expect(table.root.rows[1].className, 'to be', 'zebra highlight');
+    });
+
+    it('should toggle only the zebra class', () => {
+      var table = new Tabellion(tableEl);
+      table.zebrify();
+      table.highlight(1);
+      expect(table.root.rows[1].className, 'to be', 'zebra highlight');
+      table.zebrify();
+      expect(table.root.rows[1].className, 'to be', 'highlight');
+    });
+
+    it('should toggle only the highlight class', () => {
+      var table = new Tabellion(tableEl);
+      table.zebrify();
+      table.highlight(1);
+      expect(table.root.rows[1].className, 'to be', 'zebra highlight');
+      table.highlight(1);
+      expect(table.root.rows[1].className, 'to be', 'zebra');
+    });
+  });
 });
