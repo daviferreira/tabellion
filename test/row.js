@@ -61,21 +61,21 @@ describe('row tests', () => {
     it('should be possible to add a row above other row', () => {
       var table = new Tabellion(tableEl);
       expect(table.root.rows.length, 'to be', 2);
-      table.addRow('above', table.root.rows[1]);
+      table.addRow('above', table.root.rows[0]);
       expect(table.root.rows.length, 'to be', 3);
-      expect(table.root.rows[0].id, 'to be', 'row-1');
-      expect(table.root.rows[1].id, 'to be', '');
+      expect(table.root.rows[0].id, 'to be', '');
+      expect(table.root.rows[1].id, 'to be', 'row-1');
       expect(table.root.rows[2].id, 'to be', 'row-2');
     });
 
     it('should be possible to add a row below other row', () => {
       var table = new Tabellion(tableEl);
       expect(table.root.rows.length, 'to be', 2);
-      table.addRow('below', table.root.rows[0]);
+      table.addRow('below', table.root.rows[1]);
       expect(table.root.rows.length, 'to be', 3);
       expect(table.root.rows[0].id, 'to be', 'row-1');
-      expect(table.root.rows[1].id, 'to be', '');
-      expect(table.root.rows[2].id, 'to be', 'row-2');
+      expect(table.root.rows[1].id, 'to be', 'row-2');
+      expect(table.root.rows[2].id, 'to be', '');
     });
 
     it('should throw an error when row element is invalid', () => {

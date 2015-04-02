@@ -67,6 +67,52 @@ describe('column tests', () => {
     });
   });
 
+  describe('before and after', () => {
+    it('should be possible to add a column before other column', () => {
+      var table = new Tabellion(tableEl);
+      var row = table.root.rows[0];
+      expect(row.cells.length, 'to be', 1);
+      table.addColumn('before', row.cells[0]);
+      expect(row.cells.length, 'to be', 2);
+      expect(row.cells[0].id, 'to be', '');
+      expect(row.cells[1].id, 'to be', 'row-1-cell-1');
+    });
+
+    it('should be possible to add a column after other column', () => {
+      var table = new Tabellion(tableEl);
+      var row = table.root.rows[0];
+      expect(row.cells.length, 'to be', 1);
+      table.addColumn('after', row.cells[0]);
+      expect(row.cells.length, 'to be', 2);
+      expect(row.cells[0].id, 'to be', 'row-1-cell-1');
+      expect(row.cells[1].id, 'to be', '');
+    });
+
+    it('should throw an error when column element is invalid', () => {
+      var table = new Tabellion(tableEl);
+      expect(() => {
+        table.addColumn('before');
+      }, 'to throw', 'Invalid column element');
+
+      expect(() => {
+        table.addColumn('after', window.document.body);
+      }, 'to throw', 'Invalid column element');
+
+      expect(() => {
+        table.addColumn('before', tableEl);
+      }, 'to throw', 'Invalid column element');
+    });
+
+    it('should throw an error when row is not a child of current table', () => {
+      var table = new Tabellion(tableEl);
+      var colEl = document.createElement('td');
+      expect(() => {
+        table.addColumn('before', colEl);
+      }, 'to throw', 'Column is not a child of selected table');
+    });
+  });
+
+
   describe('delete column', () => {
     it('should be possible to delete a column by index', () => {
       var table = new Tabellion(tableEl);
