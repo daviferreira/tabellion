@@ -57,6 +57,43 @@ describe('row tests', () => {
     });
   });
 
+  describe('added row content', () => {
+    it('should add cells with a default value of <br />', () => {
+      var table = new Tabellion(tableEl);
+      table.addRow();
+      expect(table.root.rows.length, 'to be', 3);
+      expect(table.root.rows[2].cells.length, 'to be', 1);
+      expect(table.root.rows[2].cells[0].innerHTML, 'to be', '<br>');
+    });
+
+    it('should accept custom content', () => {
+      var table = new Tabellion(tableEl);
+      table.addRow({
+        index: -1,
+        cellContent: 'test'
+      });
+      expect(table.root.rows.length, 'to be', 3);
+      expect(table.root.rows[2].cells.length, 'to be', 1);
+      expect(table.root.rows[2].cells[0].innerHTML, 'to be', 'test');
+    });
+
+    it('should accept an array with custom content for each cell', () => {
+      var table = new Tabellion(tableEl);
+      var content = ['test 1', 'test 2', 'test 3'];
+      table.addColumn();
+      table.addColumn();
+      table.addRow({
+        index: -1,
+        cellContent: content
+      });
+      expect(table.root.rows.length, 'to be', 3);
+      expect(table.root.rows[2].cells.length, 'to be', 3);
+      for (let i = 0; i < table.root.rows[2].cells.length; i += 1) {
+        expect(table.root.rows[2].cells[i].innerHTML, 'to be', content[i]);
+      }
+    });
+  });
+
   describe('above and below', () => {
     it('should be possible to add a row above other row', () => {
       var table = new Tabellion(tableEl);

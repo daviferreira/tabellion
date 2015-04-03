@@ -51,6 +51,22 @@ describe('column tests', () => {
       );
     });
 
+    it('should have a default content of <br>', () => {
+      var table = new Tabellion(tableEl);
+      expect(table.root.rows[0].cells.length, 'to be', 1);
+      table.addColumn();
+      expect(table.root.rows[0].cells.length, 'to be', 2);
+      expect(table.root.rows[0].cells[1].innerHTML, 'to be', '<br>');
+    });
+
+    it('should accept custom content', () => {
+      var table = new Tabellion(tableEl);
+      expect(table.root.rows[0].cells.length, 'to be', 1);
+      table.addColumn({ index: -1, content: 'test' });
+      expect(table.root.rows[0].cells.length, 'to be', 2);
+      expect(table.root.rows[0].cells[1].innerHTML, 'to be', 'test');
+    });
+
     it('should throw an error when index is invalid', () => {
       var table = new Tabellion(tableEl);
       expect(() => {
