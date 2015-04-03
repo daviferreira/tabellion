@@ -5,7 +5,7 @@
   "main": "dist/tabellion.js",
   "scripts": {
     "build": "npm run test && npm run bundle && npm run uglify",
-    "bundle": "node_modules/.bin/babel lib/tabellion.js --out-file dist/tabellion.js --modules ignore",
+    "bundle": "node_modules/.bin/babel lib/tabellion.js --out-file dist/tabellion.js --modules umd",
     "lint": "node_modules/.bin/jshint .",
     "test": "npm run lint && node_modules/.bin/mocha --compilers js:babel/register",
     "uglify": "node_modules/.bin/uglify -s dist/tabellion.js -o dist/tabellion.min.js",
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/daviferreira/tabellion",
   "devDependencies": {
-    "babel": "^4.7.16",
+    "babel": "^5.0.4",
     "jsdom": "^4.0.5",
     "jshint": "^2.6.3",
     "mocha": "^2.2.1",
