@@ -30,18 +30,33 @@ var Tabellion = (function () {
   }, {
     key: 'addRow',
     value: function addRow() {
-      var index = arguments[0] === undefined ? -1 : arguments[0];
-      var row = arguments[1] === undefined ? undefined : arguments[1];
+      var options = arguments[0] === undefined ? { index: -1, cellContent: '<br />' } : arguments[0];
 
+      var index = options.index;
       if (['above', 'below'].indexOf(index) !== -1) {
         if (index === 'above') {
-          index = this._getRowIndex(row);
+          index = this._getRowIndex(options.target);
         } else {
-          index = this._getRowIndex(row) + 1;
+          index = this._getRowIndex(options.target) + 1;
         }
       }
       index = this._validateRowIndex(index);
-      return this._element.insertRow(index);
+      // TODO: extract this to a method
+      var totalCells = this._element.rows[0].cells.length;
+      var row = this._element.insertRow(index);
+      for (var i = 0; i < totalCells; i += 1) {
+        var cell = row.insertCell(i);
+        if (options.cellContent instanceof Array) {
+          if (options.cellContent[i]) {
+            cell.innerHTML = options.cellContent[i];
+          } else {
+            cell.innerHTML = options.cellContent;
+          }
+        } else {
+          cell.innerHTML = options.cellContent;
+        }
+      }
+      return row;
     }
   }, {
     key: 'deleteRow',
@@ -52,20 +67,22 @@ var Tabellion = (function () {
   }, {
     key: 'addColumn',
     value: function addColumn() {
-      var index = arguments[0] === undefined ? -1 : arguments[0];
-      var column = arguments[1] === undefined ? undefined : arguments[1];
+      var options = arguments[0] === undefined ? { index: -1, content: '<br />' } : arguments[0];
 
+      var index = options.index;
       if (['before', 'after'].indexOf(index) !== -1) {
         if (index === 'before') {
-          index = this._getColumnIndex(column);
+          index = this._getColumnIndex(options.target);
         } else {
-          index = this._getColumnIndex(column) + 1;
+          index = this._getColumnIndex(options.target) + 1;
         }
       }
       index = this._validateColumnIndex(index);
       var cells = [];
       for (var i = 0; i < this._element.rows.length; i++) {
-        cells.push(this._element.rows[i].insertCell(index));
+        var cell = this._element.rows[i].insertCell(index);
+        cell.innerHTML = options.content;
+        cells.push(cell);
       }
       return cells;
     }
