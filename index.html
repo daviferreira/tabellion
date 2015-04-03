@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tabellion - HTML table manipulation made easy</title>
+  <meta name="description" content="Tabellion is a lightweight script to manipulate tables, table rows and table cells.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="container">
+    <h1>Tabellion</h1>
+
+    <div class="table-contros">
+      <button id="btn-add-row">add row</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Book</th>
+          <th>ISBN</th>
+          <th>Author</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Trigger Warning</td>
+          <td>0062330268</td>
+          <td>Neil Gaiman</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="js/tabellion.min.js"></script>
+  <script>
+    var tbl = new Tabellion('table');
+    document.getElementById('btn-add-row').addEventListener('click', function (e) {
+      e.preventDefault();
+      tbl.addRow();
+    });
+  </script>
+</body>
+</html>
