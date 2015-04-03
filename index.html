@@ -18,7 +18,9 @@
     <h1>Tabellion</h1>
 
     <div class="table-contros">
+      <button id="btn-del-table">delete table</button>
       <button id="btn-add-row">add row</button>
+      <button id="btn-add-column">add column</button>
     </div>
 
     <table>
@@ -29,7 +31,7 @@
           <th>Author</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody contenteditable="true">
         <tr>
           <td>Trigger Warning</td>
           <td>0062330268</td>
@@ -42,10 +44,26 @@
   <script src="js/tabellion.min.js"></script>
   <script>
     var tbl = new Tabellion('table');
-    document.getElementById('btn-add-row').addEventListener('click', function (e) {
-      e.preventDefault();
-      tbl.addRow();
-    });
+
+    document.getElementById('btn-add-row')
+      .addEventListener('click', function (e) {
+        e.preventDefault();
+        tbl.addRow();
+      });
+
+    document.getElementById('btn-add-column')
+      .addEventListener('click', function (e) {
+        e.preventDefault();
+        tbl.addColumn();
+      });
+
+    document.getElementById('btn-del-table')
+      .addEventListener('click', function (e) {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete this table?')) {
+          tbl.deleteTable();
+        }
+      });
   </script>
 </body>
 </html>
