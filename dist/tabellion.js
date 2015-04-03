@@ -80,7 +80,12 @@ var Tabellion = (function () {
       index = this._validateColumnIndex(index);
       var cells = [];
       for (var i = 0; i < this._element.rows.length; i++) {
-        var cell = this._element.rows[i].insertCell(index);
+        var cell;
+        if (this._element.rows[i].parentNode.tagName.toLowerCase() === 'thead') {
+          cell = this._element.rows[i].insertBefore(document.createElement('th'), this._element.rows[i].cells[index]);
+        } else {
+          cell = this._element.rows[i].insertCell(index);
+        }
         cell.innerHTML = options.content;
         cells.push(cell);
       }
