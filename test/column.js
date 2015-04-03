@@ -40,7 +40,7 @@ describe('column tests', () => {
     it('should be possible to add a column by index', () => {
       var table = new Tabellion(tableEl);
       expect(table.root.rows[0].cells.length, 'to be', 1);
-      table.addColumn(0);
+      table.addColumn({ index: 0 });
       expect(table.root.rows[0].cells.length, 'to be', 2);
       // all other cells have IDs
       expect(table.root.rows[0].cells[0].getAttribute('id'), 'to be', null);
@@ -54,15 +54,15 @@ describe('column tests', () => {
     it('should throw an error when index is invalid', () => {
       var table = new Tabellion(tableEl);
       expect(() => {
-        table.addColumn(NaN);
+        table.addColumn({ index: NaN });
       }, 'to throw', 'Invalid column index');
 
       expect(() => {
-        table.addColumn(-21);
+        table.addColumn({ index: -21 });
       }, 'to throw', 'Invalid column index');
 
       expect(() => {
-        table.addColumn('43');
+        table.addColumn({ index: '43' });
       }, 'to throw', 'Invalid column index');
     });
   });
@@ -72,7 +72,7 @@ describe('column tests', () => {
       var table = new Tabellion(tableEl);
       var row = table.root.rows[0];
       expect(row.cells.length, 'to be', 1);
-      table.addColumn('before', row.cells[0]);
+      table.addColumn({ index: 'before', target: row.cells[0] });
       expect(row.cells.length, 'to be', 2);
       expect(row.cells[0].id, 'to be', '');
       expect(row.cells[1].id, 'to be', 'row-1-cell-1');
@@ -82,7 +82,7 @@ describe('column tests', () => {
       var table = new Tabellion(tableEl);
       var row = table.root.rows[0];
       expect(row.cells.length, 'to be', 1);
-      table.addColumn('after', row.cells[0]);
+      table.addColumn({ index: 'after', target: row.cells[0] });
       expect(row.cells.length, 'to be', 2);
       expect(row.cells[0].id, 'to be', 'row-1-cell-1');
       expect(row.cells[1].id, 'to be', '');
@@ -91,15 +91,15 @@ describe('column tests', () => {
     it('should throw an error when column element is invalid', () => {
       var table = new Tabellion(tableEl);
       expect(() => {
-        table.addColumn('before');
+        table.addColumn({ index: 'before' });
       }, 'to throw', 'Invalid column element');
 
       expect(() => {
-        table.addColumn('after', window.document.body);
+        table.addColumn({ index: 'after', target: window.document.body });
       }, 'to throw', 'Invalid column element');
 
       expect(() => {
-        table.addColumn('before', tableEl);
+        table.addColumn({ index: 'before', target: tableEl });
       }, 'to throw', 'Invalid column element');
     });
 
@@ -107,16 +107,15 @@ describe('column tests', () => {
       var table = new Tabellion(tableEl);
       var colEl = document.createElement('td');
       expect(() => {
-        table.addColumn('before', colEl);
+        table.addColumn({ index: 'before', target: colEl });
       }, 'to throw', 'Column is not a child of selected table');
     });
   });
 
-
   describe('delete column', () => {
     it('should be possible to delete a column by index', () => {
       var table = new Tabellion(tableEl);
-      table.addColumn(0);
+      table.addColumn({ index: 0 });
       expect(table.root.rows[0].cells.length, 'to be', 2);
       table.deleteColumn(0);
       expect(table.root.rows[0].cells.length, 'to be', 1);

@@ -33,7 +33,7 @@ describe('row tests', () => {
 
     it('should be possible to specify an index', () => {
       var table = new Tabellion(tableEl);
-      table.addRow(1);
+      table.addRow({ index: 1 });
       // we need to do this check here because of jsdom
       // https://github.com/tmpvar/jsdom/issues/742
       expect(table.root.rows.length, 'to be', 3);
@@ -44,15 +44,15 @@ describe('row tests', () => {
     it('should throw an error when index is invalid', () => {
       var table = new Tabellion(tableEl);
       expect(() => {
-        table.addRow('invalid');
+        table.addRow({ index: 'invalid' });
       }, 'to throw', 'Invalid row index');
 
       expect(() => {
-        table.addRow('99.32');
+        table.addRow({ index: '99.32' });
       }, 'to throw', 'Invalid row index');
 
       expect(() => {
-        table.addRow(-10);
+        table.addRow({ index: -10 });
       }, 'to throw', 'Invalid row index');
     });
   });
@@ -61,7 +61,7 @@ describe('row tests', () => {
     it('should be possible to add a row above other row', () => {
       var table = new Tabellion(tableEl);
       expect(table.root.rows.length, 'to be', 2);
-      table.addRow('above', table.root.rows[0]);
+      table.addRow({ index: 'above', target: table.root.rows[0] });
       expect(table.root.rows.length, 'to be', 3);
       expect(table.root.rows[0].id, 'to be', '');
       expect(table.root.rows[1].id, 'to be', 'row-1');
@@ -71,7 +71,7 @@ describe('row tests', () => {
     it('should be possible to add a row below other row', () => {
       var table = new Tabellion(tableEl);
       expect(table.root.rows.length, 'to be', 2);
-      table.addRow('below', table.root.rows[1]);
+      table.addRow({ index: 'below', target: table.root.rows[1] });
       expect(table.root.rows.length, 'to be', 3);
       expect(table.root.rows[0].id, 'to be', 'row-1');
       expect(table.root.rows[1].id, 'to be', 'row-2');
@@ -81,15 +81,15 @@ describe('row tests', () => {
     it('should throw an error when row element is invalid', () => {
       var table = new Tabellion(tableEl);
       expect(() => {
-        table.addRow('above');
+        table.addRow({ index: 'above' });
       }, 'to throw', 'Invalid row element');
 
       expect(() => {
-        table.addRow('below', window.document.body);
+        table.addRow({ index: 'below', target: window.document.body });
       }, 'to throw', 'Invalid row element');
 
       expect(() => {
-        table.addRow('above', tableEl);
+        table.addRow({ index: 'above', target: tableEl });
       }, 'to throw', 'Invalid row element');
     });
 
@@ -97,7 +97,7 @@ describe('row tests', () => {
       var table = new Tabellion(tableEl);
       var rowEl = document.createElement('tr');
       expect(() => {
-        table.addRow('above', rowEl);
+        table.addRow({ index: 'above', target: rowEl });
       }, 'to throw', 'Row is not a child of selected table');
     });
   });
