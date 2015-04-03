@@ -12,12 +12,14 @@ describe('column tests', () => {
   beforeEach(() => {
     tableEl = document.createElement('table');
     tableEl.innerHTML = `
-      <tr id="row-1">
-        <td id="row-1-cell-1">1</td>
-      </tr>
-      <tr id="row-2">
-        <td id="row-2-cell-1">2</td>
-      </tr>
+      <tbody>
+        <tr id="row-1">
+          <td id="row-1-cell-1">1</td>
+        </tr>
+        <tr id="row-2">
+          <td id="row-2-cell-1">2</td>
+        </tr>
+      </tbody>
     `;
   });
 
@@ -65,6 +67,15 @@ describe('column tests', () => {
       table.addColumn({ index: -1, content: 'test' });
       expect(table.root.rows[0].cells.length, 'to be', 2);
       expect(table.root.rows[0].cells[1].innerHTML, 'to be', 'test');
+    });
+
+    it('should add a th element when row is inside thead', () => {
+      tableEl.innerHTML = '<thead><tr><th>header</td></tr></thead>' +
+                          tableEl.innerHTML;
+      var table = new Tabellion(tableEl);
+      table.addColumn({ index: -1, content: 'test' });
+      expect(table.root.rows[0].cells.length, 'to be', 2);
+      expect(table.root.rows[0].cells[1].tagName.toLowerCase(), 'to be', 'th');
     });
 
     it('should throw an error when index is invalid', () => {
